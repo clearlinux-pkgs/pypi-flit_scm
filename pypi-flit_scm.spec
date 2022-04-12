@@ -4,7 +4,7 @@
 #
 Name     : pypi-flit_scm
 Version  : 1.5.0
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/e1/16/e73f454f9914af29f226ea6fee32e98a2605778895b31d35aa66f0ab609e/flit_scm-1.5.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e1/16/e73f454f9914af29f226ea6fee32e98a2605778895b31d35aa66f0ab609e/flit_scm-1.5.0.tar.gz
 Summary  : A PEP 518 build backend that uses setuptools_scm to generate a version file from your version control system, then flit to build the package.
@@ -61,7 +61,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1649477079
+export SOURCE_DATE_EPOCH=1649748007
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
