@@ -4,7 +4,7 @@
 #
 Name     : pypi-flit_scm
 Version  : 1.5.0
-Release  : 3
+Release  : 4
 URL      : https://files.pythonhosted.org/packages/e1/16/e73f454f9914af29f226ea6fee32e98a2605778895b31d35aa66f0ab609e/flit_scm-1.5.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/e1/16/e73f454f9914af29f226ea6fee32e98a2605778895b31d35aa66f0ab609e/flit_scm-1.5.0.tar.gz
 Summary  : A PEP 518 build backend that uses setuptools_scm to generate a version file from your version control system, then flit to build the package.
@@ -61,7 +61,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1649748007
+export SOURCE_DATE_EPOCH=1651248229
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -71,6 +71,7 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
+pypi-dep-fix.py . flit-core
 python3 -m build --wheel --skip-dependency-check --no-isolation
 
 %install
@@ -79,6 +80,7 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-flit_scm
 cp %{_builddir}/flit_scm-1.5.0/LICENSE %{buildroot}/usr/share/package-licenses/pypi-flit_scm/29d3d7ebffdf889087bab0aad8b77f98e0beb6d9
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
+pypi-dep-fix.py %{buildroot} flit-core
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
