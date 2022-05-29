@@ -1,5 +1,5 @@
 PKG_NAME := pypi-flit_scm
-URL = https://files.pythonhosted.org/packages/e1/16/e73f454f9914af29f226ea6fee32e98a2605778895b31d35aa66f0ab609e/flit_scm-1.5.0.tar.gz
+URL = https://files.pythonhosted.org/packages/13/bd/1954d91d661a0f0bf1ef3893064350a22b3fdd9b15ef7091c97df13d76d7/flit_scm-1.6.1.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
