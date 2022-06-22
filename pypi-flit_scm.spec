@@ -4,7 +4,7 @@
 #
 Name     : pypi-flit_scm
 Version  : 1.6.2
-Release  : 8
+Release  : 10
 URL      : https://files.pythonhosted.org/packages/d0/17/6ccad099ef9802478643fcbca909b597da9421f0815a6dac2835c4a9c951/flit_scm-1.6.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d0/17/6ccad099ef9802478643fcbca909b597da9421f0815a6dac2835c4a9c951/flit_scm-1.6.2.tar.gz
 Summary  : A PEP 518 build backend that uses setuptools_scm to generate a version file from your version control system, then flit to build the package.
@@ -64,7 +64,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653853478
+export SOURCE_DATE_EPOCH=1655907586
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -75,6 +75,7 @@ export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
 pypi-dep-fix.py . flit-core
+pypi-dep-fix.py . setuptools_scm
 python3 -m build --wheel --skip-dependency-check --no-isolation
 pushd ../buildavx2/
 export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx"
@@ -83,6 +84,7 @@ export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 pypi-dep-fix.py . flit-core
+pypi-dep-fix.py . setuptools_scm
 python3 -m build --wheel --skip-dependency-check --no-isolation
 
 popd
@@ -94,6 +96,7 @@ mkdir -p %{buildroot}/usr/share/package-licenses/pypi-flit_scm
 cp %{_builddir}/flit_scm-1.6.2/LICENSE %{buildroot}/usr/share/package-licenses/pypi-flit_scm/29d3d7ebffdf889087bab0aad8b77f98e0beb6d9
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 pypi-dep-fix.py %{buildroot} flit-core
+pypi-dep-fix.py %{buildroot} setuptools_scm
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -105,7 +108,7 @@ export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
 popd
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
